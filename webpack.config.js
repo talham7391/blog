@@ -1,8 +1,8 @@
 
 module.exports = {
     entry: {
-        'index': "./src/index.js",
-        'about/index': "./src/about/index.js",
+        "index": "./src/index.js",
+        "posts/lessons-from-developing-a-multiplayer-card-game/index": "./src/posts/lessons-from-developing-a-multiplayer-card-game/index.js",
     },
     output: {
         filename: "[name].js"
