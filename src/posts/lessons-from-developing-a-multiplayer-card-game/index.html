@@ -2,10 +2,88 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Noto+Serif&display=swap" rel="stylesheet">
     <title>Lessons from Developing A Multiplayer Card Game</title>
 </head>
 <body>
-    <div>Testing</div>
+    <div class="page">
+        <h1 class="title">Lessons from Developing A Multiplayer Card Game</h1>
+
+        <p>Recently I released a card game to the android play store. It taught me some lessons which I’d like to share.</p>
+
+        <p>The game is called Estimation. It's a trick taking card game (similar to Hearts, Euchre, etc...) where players must guess the number of tricks they’re going to win before the game begins. You can find the rules <a href="https://www.jawaker.com/en/rules/estimation">here</a> (I would highly recommend this game).</p>
+
+        <p>Development involved writing a server which would facilitate gameplay, and a game client for people to download onto their phones. I will save the server architecture and implementation details for a separate blog post. For some context, you can view this video demonstrating actual gameplay:</p>
+
+        <div class="youtube-video">
+            <iframe class="rounded" width="100%" height="315" src="https://www.youtube.com/embed/jFbi-HWS4Y0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <p>Now let's get into the lessons!</p>
+
+        <h2>Keep Your Solutions Simple</h2>
+
+        <p>Most people work on side projects because they want to do something cool, but you need to be careful what “cool” actually means. For me, it meant flashy complicated architecture - something I can impress others with once I’ve completed the project. Here’s what my initial design looked like:</p>
+
+        <div class="image">
+            <img src="https://i.imgur.com/yXOToMf.png" alt="First architecture design iteration."/>
+            <p class="caption">First architecture design iteration.</p>
+        </div>
+
+        <p>I would have an arbitrary number of players sending their actions/events into a queue, and then an arbitrary number of workers would consume events and carry out business logic. I wanted something scalable, and this solution seems scalable at first glance: “You have more players? No problem! Just increase the number of workers!”. A solution like this would allow me to use buzzwords like “Message Broker”, “Asynchronous”, “Event Driven”, etc… and let people marvel at my design prowess.</p>
+
+        <p>The problem with this solution is that it is too much work! Something that could’ve been a simple function call now turns into an event which needs an explicit schema and then logic to fire the right callback upon processing. It would also require a lot of concurrency which has its own headaches (race conditions, deadlocks, etc…).</p>
+
+        <p>Here is the solution I ended up using:</p>
+
+        <div class="image">
+            <img style="max-width: 550px" src="https://i.imgur.com/DWpp1St.png" alt="First architecture design iteration."/>
+            <p class="caption">Final architecture design iteration.</p>
+        </div>
+
+        <p>Notice how simple it is! The central component is a Party which facilitates communication between the 4 players. The components on the right hold business logic and carry out gameplay. Although this solution isn’t as “flashy”, it is just as scalable. You simply spawn more “Party” instances (along with the business logic components) as you get more players.</p>
+
+        <p>We need to redefine the term “cool”. Something that works, can scale well, and is easy to explain to others is much “cooler” than a flashy solution which uses hot architecture trends.</p>
+
+        <h2>Document Any Thoughts and Findings</h2>
+
+        <div class="image">
+            <img class="rounded" src="https://i.imgur.com/mpKBuXl.jpg" alt="An image of what my notebook looked like before coding."/>
+            <p class="caption">An image of what my notebook looked like before coding.</p>
+        </div>
+
+        <p>There are many reasons why you should document ALL THE THINGS but there are 2 in particular that motivate me.</p>
+
+        <p>Firstly, writing down your thoughts means you can come back to them later. It takes a developer 15 minutes to get into a state of “flow” where they’re ingrained in their work. The longer we are in this state, the deeper we are able to think about a problem. Now suppose we need to abandon a project and come back to it in a few days. It will take some time to get into the same state of mind. However, I've found that I can be as productive much quicker if I read my previous thoughts to bring me up to speed. It’s also very helpful for remembering details.</p>
+
+        <p>Secondly, writing down your thoughts slows the pace of your thinking to how fast you can write. Why is this helpful? It gives you extra time to think deeper about the problem. I noticed there were some edge cases and bugs I was able to catch because writing down my thoughts gave me a second chance to evaluate them.</p>
+
+        <h2>The First Thing You Should Do Is Deploy</h2>
+
+        <p>This is something I learned from Robert Martin’s <a href="https://www.goodreads.com/book/show/18043011-clean-architecture">Clean Architecture</a>. He goes more in depth in his book, but I’ll outline some key points. Usually deploying is the last thing people do when working on their side projects - but there are issues in a production setting you won’t know about that may heavily influence what your solution may look like. Deploying first and iteratively throughout the development process will help you find these issues.</p>
+
+        <p>In my case, I got a little lucky but one problem I may have had is outlined in the following screenshot taken on a mobile phone:</p>
+
+        <div class="image">
+            <img class="rounded" style="max-width: 330px" src="https://i.imgur.com/ShbDNgK.jpg" alt="Game client on Google Pixel XL."/>
+            <p class="caption">Game client on Google Pixel XL.</p>
+        </div>
+
+        <p>As you can see, had I decided to place the text input slightly lower then it would’ve been blocked by the keyboard. This is something I found out after I deployed for the first time.</p>
+
+        <h2>Summary</h2>
+
+        <p>Releasing this project taught me a lot. There are other topics such as architecture, tools/languages, and programming practices that I plan to write about in the future. For right now, I leave you with 3 lessons:</p>
+
+        <ol>
+            <li>Keep your solutions simple</li>
+            <li>Document any thoughts and findings</li>
+            <li>The first thing you should do is deploy</li>
+        </ol>
+
+        <p>Also I would encourage everyone to download the app and play with your friends as me and my friends are doing here:</p>
+    </div>
     <script src="index.js"></script>
 </body>
 </html>

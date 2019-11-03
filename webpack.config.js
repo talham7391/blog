@@ -18,8 +18,8 @@ module.exports = {
                         presets: ['@babel/preset-env']
                     }
                 }
-            }, {
-                test: /\.html$/i,
+            },{
+                test: /\.(html|ttf)$/i,
                 loader: 'file-loader',
                 options: {
                     outputPath: (url, resourcePath, context) => {
@@ -27,7 +27,14 @@ module.exports = {
                         return l[l.length - 1];
                     },
                 },
-            }
+            },{
+                test: /\.s[ac]ss$/i,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader',
+                ],
+            },
         ]
     }
 };
