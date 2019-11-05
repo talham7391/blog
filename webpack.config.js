@@ -1,8 +1,8 @@
 
 module.exports = {
     entry: {
-        "index": "./src/index.js",
-        "posts/lessons-from-developing-a-multiplayer-card-game/index": "./src/posts/lessons-from-developing-a-multiplayer-card-game/index.js",
+        "index": "./src/pages/index.js",
+        "posts/lessons-from-developing-a-multiplayer-card-game/index": "./src/pages/posts/lessons-from-developing-a-multiplayer-card-game/index.js",
     },
     output: {
         filename: "[name].js"
@@ -15,7 +15,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
+                        presets: ['@babel/preset-env', '@babel/preset-react']
                     }
                 }
             },{
@@ -23,7 +23,7 @@ module.exports = {
                 loader: 'file-loader',
                 options: {
                     outputPath: (url, resourcePath, context) => {
-                        const l = resourcePath.split("src/");
+                        const l = resourcePath.split("src/pages/");
                         return l[l.length - 1];
                     },
                 },
