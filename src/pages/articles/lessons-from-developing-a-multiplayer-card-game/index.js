@@ -1,4 +1,4 @@
 import './index.html';
-import '../styles.sass';
+import '../articlestyles.sass';
 
 import '../../../js/navbar';

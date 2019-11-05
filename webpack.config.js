@@ -2,7 +2,8 @@
 module.exports = {
     entry: {
         "index": "./src/pages/index.js",
-        "posts/lessons-from-developing-a-multiplayer-card-game/index": "./src/pages/posts/lessons-from-developing-a-multiplayer-card-game/index.js",
+        "articles/index": "./src/pages/articles/index.js",
+        "articles/lessons-from-developing-a-multiplayer-card-game/index": "./src/pages/articles/lessons-from-developing-a-multiplayer-card-game/index.js",
     },
     output: {
         filename: "[name].js"
