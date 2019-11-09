@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900|Noto+Serif&display=swap" rel="stylesheet">
+    <title>How to Finish That Side Project You Started</title>
+</head>
+<body>
+    <div id="navbar"></div>
+    <div class="content page">
+        <p class="date">November 8, 2019</p>
+
+        <h1 class="title">How to Finish That Side Project You Started</h1>
+
+        <p>I’ve had a lot of success with the approach I took developing my last side project (a multiplayer card game called Estimation). In this article, I will outline my approach and hopefully you can apply these principles in your next project to get it across the finish line.</p>
+
+        <p><strong>Quick disclaimer</strong> - this article talks about how to finish your projects, not why you should finish them. Why you should finish your projects deserves its own article.</p>
+
+        <p>Imagine we start working on a side project that will require 10,000 lines of code to complete. We get to 3,000 lines and realize we’re starting to get bored but decide to grind it out. Then we get to 5,000 lines, but no further. From here on out our time is spent on YouTube videos (of people shoving their face into bread) until we’re hit with another jolt of inspiration and decide to start a new project. And so the vicious cycle continues. The solution to this problem is quite simple really… stop working on projects that require 10,000 lines of code to be considered complete!</p>
+
+        <p>In formal terms, we’re talking about project scope. Often times, people underestimate the time and development required to get a project to the finish line. This is dangerous because either you’ll spend many months finishing a project or abandon it before completion. Both outcomes less than ideal. So how should one approach project scope?</p>
+
+        <p>Define an MVP (Minimum Viable Product). An MVP should only have all the necessary features to provide value. In my case, it meant my game shouldn’t have animations, fancy art, match making, in-game purchases, etc… I decided my MVP would allow 4 friends to come together, create a game, and play several rounds of Estimation together.</p>
+
+        <p>The great part about this approach is that once you’ve completed your MVP, you have the option of walking away and you’ll have a project which you can use/demo. You did what you set out to do, and you can now move on. However, if you want to start developing other features, you still can. Once you’re bored, you can walk away and not worry about time wasted on a half finished project.</p>
+
+        <h2>How I Applied This Approach to My Project</h2>
+
+        <p>It’s hard to judge how much time a project will take to finish, especially when you’ve never done anything similar to it before. I’ve developed REST APIs before but this was my first project using sockets and multiplayer communication. I couldn’t find a good proxy to estimate how much time this would take. So this is how I approached my MVP strategy:</p>
+
+        <div class="image">
+            <img style="max-width: 500px" src="/assets/how_to_finish_that_side_project_you_started/sub_projects.svg" alt="I vertically split the project into 3 smaller projects."/>
+            <p class="caption">I vertically split the project into 3 smaller projects.</p>
+        </div>
+
+        <p>Lets see what each sub-project is responsible for.</p>
+
+        <h3>Estimation Logic</h3>
+
+        <ul>
+            <li>Facilitates estimation gameplay.</li>
+            <li>Asserts game logic on player input.</li>
+        </ul>
+
+        <div class="github-plug">
+            <img src="/assets/icons/github-logo.svg"/>
+            <p><a href="https://github.com/talham7391/estimation">https://github.com/talham7391/estimation</a></p>
+        </div>
+
+        <h3>Web Service</h3>
+
+        <ul>
+            <li>Allows players to create games.</li>
+            <li>Facilitates multiplayer gameplay for clients.</li>
+        </ul>
+
+        <div class="github-plug">
+            <img src="/assets/icons/github-logo.svg"/>
+            <p><a href="https://github.com/talham7391/estimationserver">https://github.com/talham7391/estimationserver</a></p>
+        </div>
+
+        <h3>Game Client</h3>
+
+        <ul>
+            <li>A desktop and mobile app.</li>
+        </ul>
+
+        <div class="github-plug">
+            <img src="/assets/icons/github-logo.svg"/>
+            <p><a href="https://github.com/talham7391/estimation-godot">https://github.com/talham7391/estimation-godot</a></p>
+        </div>
+
+        <p>Each sub-project requires completion of the previous one. Inherently, this creates the following dependency graph. Game Logic <- Web Service <- Game Client. This approach/structure works amazingly well for many different reasons:</p>
+
+        <ul>
+            <li>I can stop after completing any subproject and I will have created something of value.</li>
+            <li>It greatly reduces coupling in my implementation.</li>
+            <li>I can change my game logic by editing the Estimation library. I don’t have to touch the Web Server or Client Code and everything will just work.</li>
+            <li>I can add new clients (web app, command line, etc...) very easily.</li>
+            <li>If I decide to create an AI I can have a library which can run simulations - something that would’ve been very difficult and would’ve required a lot of changes had I baked my game logic into the web server.</li>
+            <li>It made my code very testable.</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+
+        <p>I’ve only touched the surface of why project scoping is so important. The article is getting long but I can still write more paragraphs outlining the beneficial side effects it has. Project scoping is a skill like any other. The more you practice it, the better you’ll get. Keep focusing on it and eventually you’ll be a project scope pro! Have a vision for your project, break it down into smaller steps, and take the first one with an MVP. </p>
+    </div>
+    <div id="footer"></div>
+    <script src="index.js"></script>
+</body>
+</html>
