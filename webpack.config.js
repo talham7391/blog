@@ -21,7 +21,7 @@ module.exports = {
                     }
                 }
             },{
-                test: /\.(html|ttf|svg)$/i,
+                test: /\.(html|ttf|svg|png)$/i,
                 loader: 'file-loader',
                 options: {
                     outputPath: (url, resourcePath, context) => {
